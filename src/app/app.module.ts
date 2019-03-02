@@ -3,10 +3,18 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { InsertionSortComponent } from './sorting/insertion-sort/insertion-sort.component';
+import { MergeSortComponent } from './sorting/merge-sort/merge-sort.component';
+import { HeapSortComponent } from './sorting/heap-sort/heap-sort.component';
+import { QuickSortComponent } from './sorting/quick-sort/quick-sort.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    InsertionSortComponent,
+    MergeSortComponent,
+    HeapSortComponent,
+    QuickSortComponent
   ],
   imports: [
     BrowserModule,

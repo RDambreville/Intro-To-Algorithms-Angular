@@ -1,0 +1,20 @@
+<fieldset>
+  <legend>Heap Sort</legend>
+  <div class="row section">
+      <label>Enter numbers</label>
+      <input type="text" id="hpSrtInput" oninput="parseInputArray(event.target.value)">
+      <label>Size</label>
+      <input type="text" id="hpArrSize" readonly value="0" style="width: 5%">
+  </div>
+  <div class="row section">
+      <label>Enter a heap size less than or equal to the size of the array</label>
+      <input type="number" id="hpSizeInput">
+  </div>
+  <div class="row section">
+      <button onclick="heapSortEntry()">Create a Heap</button>
+      <!-- <button onclick="" -->
+  </div>
+  <div class="row section">
+      <span id="hpSrtOutput"></span>
+  </div>
+</fieldset>
