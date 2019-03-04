@@ -7,7 +7,7 @@ import { Heap } from './heap';
 @Component({
   selector: 'app-heap-sort',
   templateUrl: './heap-sort.component.html',
-  styleUrls: ['./heap-sort.component.css']
+  styleUrls: []
 })
 export class HeapSortComponent /*extends SortingComponent*/ implements OnInit {
 
@@ -16,6 +16,9 @@ export class HeapSortComponent /*extends SortingComponent*/ implements OnInit {
   inputArr: any;
 
   sortedOutput: any[];
+
+  index: number;
+  key: number;
 
   max: any;
 
@@ -28,6 +31,13 @@ export class HeapSortComponent /*extends SortingComponent*/ implements OnInit {
   ngOnInit() {
   }
 
+  changeIndex(index: string) {
+    this.index = Number.parseInt(index, 10);
+  }
+
+  changeKey(key: any) {
+    this.key = Number.parseInt(key, 10);
+  }
 
   createHeap() {
     const sortBtn = document.getElementById('sortBtn');
@@ -44,6 +54,20 @@ export class HeapSortComponent /*extends SortingComponent*/ implements OnInit {
     // this.heap.heapSort();
     console.log('heap', this.heap);
     this.templateService.togglelBtn(sortBtn, 'enable');
+  }
+
+  extractMax() {
+    this.max = this.heap.heapExtractMax();
+    this.sortedOutput = this.heap.arr;
+  }
+
+  getMax() {
+    this.max = this.heap.heapMax();
+  }
+
+  increaseKey() {
+    this.heap.heapIncreaseKey(this.index, this.key);
+    this.sortedOutput = this.heap.arr;
   }
 
   sortHeap() {
@@ -76,14 +100,5 @@ export class HeapSortComponent /*extends SortingComponent*/ implements OnInit {
 
     // document.getElementById('hpArrSize').value = this.inputArr.length;
     this.heapSize = this.inputArr.length;
-  }
-
-  getMax() {
-    this.max = this.heap.heapMax();
-  }
-
-  extractMax() {
-    this.max = this.heap.heapExtractMax();
-    this.sortedOutput = this.heap.arr;
   }
 }

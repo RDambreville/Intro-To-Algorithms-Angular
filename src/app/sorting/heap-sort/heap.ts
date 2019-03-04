@@ -1,4 +1,5 @@
 import { SortingService } from './../../shared/services/sorting.service';
+
 export class Heap {
     heapObj: any;
     arr: any[];
@@ -61,8 +62,10 @@ export class Heap {
             this.heapSize--;
             this.maxHeapify(0);
         }
+        this.heapSize = this.heapObj.heapSize; // reset heap size
     }
-// For Max Priortiy Queues
+
+    // For Max Priortiy Queues
     heapMax(): any {
         return this.arr[0];
     }
@@ -72,7 +75,7 @@ export class Heap {
             return console.error('HEAP UNDEFLOW');
         }
         const max = this.arr[0];
-        this.arr[0] = this.arr[this.heapSize];
+        this.arr[0] = this.arr[this.heapSize - 1];
         this.heapSize--;
         this.maxHeapify(0);
         return max;
@@ -80,7 +83,7 @@ export class Heap {
 
     heapIncreaseKey(i: number, key: any) {
         if (key < this.arr[i]) {
-           return console.error('new key is smaller than current key');
+            return console.error('new key is smaller than current key');
         }
         this.arr[i] = key;
         while (i > 0 && this.arr[this.parent(i)] < this.arr[i]) {

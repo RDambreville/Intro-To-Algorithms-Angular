@@ -1,59 +1,90 @@
 <div class="container-fluid">
   <div class="row section">
     <div class="col-12">
-        <legend>Heap Sort</legend>
+      <legend>Heap Sort</legend>
     </div>
   </div>
+
+  <!--Setup-->
   <div class="row section">
     <div class="col-4">
-        <label>Enter numbers</label>
-        <input type="text" id="hpSrtInput" class="form-control" (input)="parseInputArray($event.target.value)">
+      <label>Enter numbers</label>
+      <input type="text" id="hpSrtInput" class="form-control" (input)="parseInputArray($event.target.value)">
     </div>
     <div class="col-3">
-        <label>Size</label>
-        <input type="number" id="hpArrSize" class="form-control" readonly [value]="heapSize" style="width: 50%">
+      <label>Size</label>
+      <input type="number" id="hpArrSize" class="form-control" readonly [value]="heapSize" style="width: 50%">
     </div>
   </div>
   <div class="row section">
     <div class="col-12">
-        <label>Enter a heap size less than or equal to the size of the array</label>
-        <input type="number" id="hpSizeInput" style="width: 20%" class="form-control">
-    </div>   
+      <label>Enter a heap size less than or equal to the size of the array</label>
+      <input type="number" id="hpSizeInput" style="width: 20%" class="form-control">
+    </div>
   </div>
 
+  <!--Create-->
   <div class="row section">
     <div class="col-12">
-        <button id="createHeapBtn" disabled (click)="createHeap()">Create a Heap</button>
+      <button id="createHeapBtn" disabled (click)="createHeap()">Create a Heap</button>
     </div>
   </div>
 
+  <!--Sort-->
+  <pre class="row section">{{'sortedOutput: ' + sortedOutput}}</pre>
   <div class="row section">
-      <div class="col-2">
-          <button id="sortBtn" disabled (click)="sortHeap()">Sort the Heap</button>
-      </div>
-      <div class="col-10">
-          <input class="form-control" [value]="sortedOutput ? sortedOutput : ''" readonly style="width: 25%" placeholder="Sorted Heap">
-      </div>
+    <div class="col-2">
+      <button id="sortBtn" disabled (click)="sortHeap()">Sort the Heap</button>
     </div>
+    <div class="col-10">
+      <input class="form-control" [value]="sortedOutput ? sortedOutput : ''" readonly style="width: 25%" placeholder="Sorted Heap">
+    </div>
+  </div>
 
+  <!--Get Max-->
   <div class="row section">
     <div class="col-2">
       <button (click)="getMax()">Get Max</button>
     </div>
-  
+
     <div class="col-10">
-      <input type="text" class="form-control" readonly [value]="max" style="width: 25%">
+      <input type="text" class="form-control" readonly [value]="max ? max : ''" style="width: 25%">
     </div>
   </div>
 
+  <!--Extract Max-->
+  <pre>{{'heap.arr: ' + heap ? heap.arr : ''}}</pre>
+  <pre>{{'heap.length: ' + heap ? heap.length : ''}}</pre>
+  <pre>{{'heap.heapSize: ' + heap ? heap.heapSize : ''}}</pre>
   <div class="row section">
-      <div class="col-2">
-        <button (click)="extractMax()">Extract Max</button>
-      </div>
-    
-      <div class="col-10">
-        <input type="text" class="form-control" readonly [value]="max" style="width: 25%">
-      </div>
+    <div class="col-2">
+      <button (click)="extractMax()">Extract Max</button>
     </div>
+
+    <div class="col-10">
+      <input type="text" class="form-control" readonly [value]="max ? max : ''" style="width: 25%">
+    </div>
+  </div>
+
+  <!--Increase Key-->
+  <div class="row section">
+    <div class="col-2">
+      <input class="form-control" (input)="changeIndex($event.target.value)" placeholder="Enter an index">
+    </div>
+    <div class="col-2">
+      <input class="form-control" (input)="changeKey($event.target.value)" placeholder="Enter a key value">
+    </div>
+  </div>
+  <div class="row section">
+    <div class="col-2">
+      <button (click)="increaseKey()">Increase Key</button>
+    </div>
+
+    <div class="col-10">
+      <input type="text" class="form-control" readonly [value]="key ? key : ''" style="width: 25%">
+    </div>
+  </div>
+
+
 
 </div>

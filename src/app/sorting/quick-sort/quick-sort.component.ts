@@ -3,24 +3,30 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-quick-sort',
   templateUrl: './quick-sort.component.html',
-  styleUrls: ['./quick-sort.component.css']
+  styleUrls: []
 })
 export class QuickSortComponent implements OnInit {
+
+  inputArr: any[];
+
+  sortedOutput: any[];
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  quickSortEntry() {
-    let inputArr = document.getElementById('qkSrt').value.split(',');
-    inputArr = inputArr.map(num => {
-      return (num = Number.parseInt(num, 10));
-    });
-    this.quickSort(inputArr, 0, inputArr.length - 1);
 
-    console.log('sorted Array', inputArr);
-    document.getElementById('qkSortOutput').innerHTML = inputArr;
+
+  quickSortEntry() {
+    // let inputArr = document.getElementById('qkSrt').value.split(',');
+    // this.inputArr = this.inputArr.map(num => {
+    //   return (num = Number.parseInt(num, 10));
+    // });
+    this.quickSort(this.inputArr, 0, this.inputArr.length - 1);
+
+    console.log('sorted Array', this.inputArr);
+    this.sortedOutput = this.inputArr;
 
   }
 
