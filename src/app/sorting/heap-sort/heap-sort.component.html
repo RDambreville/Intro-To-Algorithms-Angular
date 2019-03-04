@@ -23,14 +23,37 @@
 
   <div class="row section">
     <div class="col-12">
-        <button (click)="heapSortEntry()">Create a Heap</button>
+        <button id="createHeapBtn" disabled (click)="createHeap()">Create a Heap</button>
     </div>
-    <!-- <button onclick="" -->
   </div>
+
   <div class="row section">
-    <div class="col-12">
-        <span id="hpSrtOutput"></span>
+      <div class="col-2">
+          <button id="sortBtn" disabled (click)="sortHeap()">Sort the Heap</button>
+      </div>
+      <div class="col-10">
+          <input class="form-control" [value]="sortedOutput ? sortedOutput : ''" readonly style="width: 25%" placeholder="Sorted Heap">
+      </div>
+    </div>
+
+  <div class="row section">
+    <div class="col-2">
+      <button (click)="getMax()">Get Max</button>
+    </div>
+  
+    <div class="col-10">
+      <input type="text" class="form-control" readonly [value]="max" style="width: 25%">
     </div>
   </div>
+
+  <div class="row section">
+      <div class="col-2">
+        <button (click)="extractMax()">Extract Max</button>
+      </div>
+    
+      <div class="col-10">
+        <input type="text" class="form-control" readonly [value]="max" style="width: 25%">
+      </div>
+    </div>
 
 </div>

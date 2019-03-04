@@ -1,5 +1,7 @@
+import { TemplateService } from './../../shared/services/template.service';
+import { SortingService } from './../../shared/services/sorting.service';
 import { Component, OnInit } from '@angular/core';
-import { SortingComponent } from '../sorting.component';
+// import { SortingComponent } from '../sorting.component';
 import { Heap } from './heap';
 
 @Component({
@@ -7,24 +9,28 @@ import { Heap } from './heap';
   templateUrl: './heap-sort.component.html',
   styleUrls: ['./heap-sort.component.css']
 })
-export class HeapSortComponent extends SortingComponent implements OnInit {
+export class HeapSortComponent /*extends SortingComponent*/ implements OnInit {
 
   heap: Heap;
   heapSize: number;
   inputArr: any;
 
-  constructor() {
-    super();
+  sortedOutput: any[];
+
+  max: any;
+
+  constructor(
+    public sortService: SortingService,
+    private templateService: TemplateService) {
+    // super();
    }
 
   ngOnInit() {
   }
 
 
-
-
-
-  heapSortEntry() {
+  createHeap() {
+    const sortBtn = document.getElementById('sortBtn');
     let heapSize = document.getElementById('hpSizeInput').innerText;
     heapSize = heapSize ? Number.parseInt(heapSize, 10) : this.inputArr.length;
 
@@ -34,23 +40,50 @@ export class HeapSortComponent extends SortingComponent implements OnInit {
       length: this.inputArr.length
     };
 
-    this.heap = new Heap(startObj);
-    this.heap.heapSort();
-    const output = document.getElementById('hpSrtOutput');
-    output.innerHTML = this.heap.heapObj.arr;
+    this.heap = new Heap(startObj, this.sortService);
+    // this.heap.heapSort();
     console.log('heap', this.heap);
+    this.templateService.togglelBtn(sortBtn, 'enable');
+  }
+
+  sortHeap() {
+    this.heap.heapSort();
+    this.sortedOutput = this.heap.arr;
   }
 
   parseInputArray(inputStr) {
-    if (inputStr.includes(', ')) {
-      this.inputArr = inputStr.split(', ').map(item => item = Number.parseInt(item, 10));
-    } else if (inputStr.includes(',')) {
-      this.inputArr = inputStr.split(',').map(item => item = Number.parseInt(item, 10));
-    } else if (inputStr.includes('')) {
-      this.inputArr = inputStr.split('').map(item => item = Number.parseInt(item, 10));
+    const createHeapBtn = document.getElementById('createHeapBtn');
+    const sortBtn = document.getElementById('sortBtn');
+    if (inputStr.length > 0) {
+      if (inputStr.includes(', ')) {
+        this.inputArr = inputStr.split(', ').map(item => item = Number.parseInt(item, 10));
+      } else if (inputStr.includes(',')) {
+        this.inputArr = inputStr.split(',').map(item => item = Number.parseInt(item, 10));
+      } else if (inputStr.includes('')) {
+        this.inputArr = inputStr.split('').map(item => item = Number.parseInt(item, 10));
+      }
+      this.templateService.togglelBtn(createHeapBtn, 'enable');
+    } else {
+      if (!createHeapBtn.attributes.getNamedItem('disabled')) {
+        this.templateService.togglelBtn(createHeapBtn, 'disable');
+      }
+
+      if (!sortBtn.attributes.getNamedItem('disabled')) {
+        this.templateService.togglelBtn(sortBtn, 'disable');
+      }
+
     }
 
     // document.getElementById('hpArrSize').value = this.inputArr.length;
     this.heapSize = this.inputArr.length;
+  }
+
+  getMax() {
+    this.max = this.heap.heapMax();
+  }
+
+  extractMax() {
+    this.max = this.heap.heapExtractMax();
+    this.sortedOutput = this.heap.arr;
   }
 }

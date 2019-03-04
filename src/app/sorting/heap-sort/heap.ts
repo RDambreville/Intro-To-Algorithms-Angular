@@ -5,7 +5,7 @@ export class Heap {
     length: number;
     heapSize: number;
 
-    constructor(inputObj, private sortService: SortingService) {
+    constructor(inputObj, public sortService: SortingService) {
         this.heapObj = inputObj;
         this.arr = inputObj.arr;
         this.length = inputObj.length;
@@ -63,7 +63,7 @@ export class Heap {
         }
     }
 // For Max Priortiy Queues
-    heapMax() {
+    heapMax(): any {
         return this.arr[0];
     }
 

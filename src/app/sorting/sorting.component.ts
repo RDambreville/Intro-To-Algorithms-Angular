@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-sorting',
   templateUrl: './sorting.component.html',
-  styleUrls: ['./sorting.component.css']
+  styleUrls: []
 })
 export class SortingComponent implements OnInit {
 
