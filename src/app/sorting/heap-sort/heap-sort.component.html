@@ -1,20 +1,36 @@
-<fieldset>
-  <legend>Heap Sort</legend>
+<div class="container-fluid">
   <div class="row section">
-      <label>Enter numbers</label>
-      <input type="text" id="hpSrtInput" oninput="parseInputArray(event.target.value)">
-      <label>Size</label>
-      <input type="text" id="hpArrSize" readonly value="0" style="width: 5%">
+    <div class="col-12">
+        <legend>Heap Sort</legend>
+    </div>
   </div>
   <div class="row section">
-      <label>Enter a heap size less than or equal to the size of the array</label>
-      <input type="number" id="hpSizeInput">
+    <div class="col-4">
+        <label>Enter numbers</label>
+        <input type="text" id="hpSrtInput" class="form-control" (input)="parseInputArray($event.target.value)">
+    </div>
+    <div class="col-3">
+        <label>Size</label>
+        <input type="number" id="hpArrSize" class="form-control" readonly [value]="heapSize" style="width: 50%">
+    </div>
   </div>
   <div class="row section">
-      <button onclick="heapSortEntry()">Create a Heap</button>
-      <!-- <button onclick="" -->
+    <div class="col-12">
+        <label>Enter a heap size less than or equal to the size of the array</label>
+        <input type="number" id="hpSizeInput" style="width: 20%" class="form-control">
+    </div>   
+  </div>
+
+  <div class="row section">
+    <div class="col-12">
+        <button (click)="heapSortEntry()">Create a Heap</button>
+    </div>
+    <!-- <button onclick="" -->
   </div>
   <div class="row section">
-      <span id="hpSrtOutput"></span>
+    <div class="col-12">
+        <span id="hpSrtOutput"></span>
+    </div>
   </div>
-</fieldset>
+
+</div>
