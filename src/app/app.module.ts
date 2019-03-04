@@ -7,6 +7,7 @@ import { InsertionSortComponent } from './sorting/insertion-sort/insertion-sort.
 import { MergeSortComponent } from './sorting/merge-sort/merge-sort.component';
 import { HeapSortComponent } from './sorting/heap-sort/heap-sort.component';
 import { QuickSortComponent } from './sorting/quick-sort/quick-sort.component';
+import { SortingComponent } from './sorting/sorting.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { QuickSortComponent } from './sorting/quick-sort/quick-sort.component';
     InsertionSortComponent,
     MergeSortComponent,
     HeapSortComponent,
-    QuickSortComponent
+    QuickSortComponent,
+    SortingComponent
   ],
   imports: [
     BrowserModule,

@@ -1,10 +1,11 @@
+import { SortingService } from './../../shared/services/sorting.service';
 export class Heap {
     heapObj: any;
     arr: any[];
     length: number;
     heapSize: number;
 
-    constructor(inputObj) {
+    constructor(inputObj, private sortService: SortingService) {
         this.heapObj = inputObj;
         this.arr = inputObj.arr;
         this.length = inputObj.length;
@@ -23,55 +24,75 @@ export class Heap {
         return (2 * i) + 1;
     }
 
-    buildMaxHeap(obj) {
-        obj.heapSize = obj.length;
-        for (let i = Math.floor((obj.length) / 2); i >= 0; i--) {
-            this.maxHeapify(obj, i);
+    buildMaxHeap() {
+        this.heapSize = this.length;
+        for (let i = Math.floor((this.length) / 2); i >= 0; i--) {
+            this.maxHeapify(i);
         }
     }
 
-    maxHeapify(obj, i) {
+    maxHeapify(i) {
         const leftIndex = this.left(i);
         const rightIndex = this.right(i);
         let largest;
-        if (leftIndex <= obj.heapSize - 1 && obj.arr[leftIndex] > obj.arr[i]) {
+        if (leftIndex <= this.heapSize - 1 && this.arr[leftIndex] > this.arr[i]) {
             largest = leftIndex;
         } else {
             largest = i;
         }
-        if (rightIndex <= obj.heapSize - 1 && obj.arr[rightIndex] > obj.arr[largest]) {
+        if (rightIndex <= this.heapSize - 1 && this.arr[rightIndex] > this.arr[largest]) {
             largest = rightIndex;
         }
         if (largest !== i) {
-            const temp = obj.arr[i];
-            obj.arr[i] = obj.arr[largest];
-            obj.arr[largest] = temp;
-            this.maxHeapify(obj, largest);
+            const temp = this.arr[i];
+            this.arr[i] = this.arr[largest];
+            this.arr[largest] = temp;
+            this.maxHeapify(largest);
         }
     }
 
     heapSort() {
-        this.buildMaxHeap(this.heapObj);
-        for (let i = this.heapObj.length - 1; i >= 0; i--) {
-            const temp = this.heapObj.arr[0];
-            this.heapObj.arr[0] = this.heapObj.arr[i];
-            this.heapObj.arr[i] = temp;
-            // this.heapObj.heapSize = this.heapObj.heapSize - 1;
-            this.heapObj.heapSize--;
-            this.maxHeapify(this.heapObj, 0);
+        this.buildMaxHeap();
+        for (let i = this.length - 1; i >= 0; i--) {
+            const temp = this.arr[0];
+            this.arr[0] = this.arr[i];
+            this.arr[i] = temp;
+            // this.heapSize = this.heapSize - 1;
+            this.heapSize--;
+            this.maxHeapify(0);
         }
     }
 // For Max Priortiy Queues
     heapMax() {
-        return this.heapObj.arr[0];
+        return this.arr[0];
     }
 
     heapExtractMax() {
-        if (this.heapObj.heapSize < 1) {
-            console.error('HEAP UNDEFLOW');
+        if (this.heapSize < 1) {
+            return console.error('HEAP UNDEFLOW');
         }
-        const max = this.heapObj.arr[0];
+        const max = this.arr[0];
+        this.arr[0] = this.arr[this.heapSize];
+        this.heapSize--;
+        this.maxHeapify(0);
+        return max;
+    }
 
+    heapIncreaseKey(i: number, key: any) {
+        if (key < this.arr[i]) {
+           return console.error('new key is smaller than current key');
+        }
+        this.arr[i] = key;
+        while (i > 0 && this.arr[this.parent(i)] < this.arr[i]) {
+            this.sortService.swap(this.arr[i], this.arr[this.parent(i)]);
+            i = this.parent(i);
+        }
+    }
+
+    maxHeapInsert(key) {
+        this.heapSize++;
+        this.arr[this.heapSize] = -(Number.MAX_VALUE);
+        this.heapIncreaseKey(this.heapSize, key);
     }
 }
 

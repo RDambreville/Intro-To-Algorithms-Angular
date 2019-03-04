@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SortingComponent } from '../sorting.component';
 import { Heap } from './heap';
 
 @Component({
@@ -6,13 +7,15 @@ import { Heap } from './heap';
   templateUrl: './heap-sort.component.html',
   styleUrls: ['./heap-sort.component.css']
 })
-export class HeapSortComponent implements OnInit {
+export class HeapSortComponent extends SortingComponent implements OnInit {
 
   heap: Heap;
   heapSize: number;
   inputArr: any;
 
-  constructor() { }
+  constructor() {
+    super();
+   }
 
   ngOnInit() {
   }
