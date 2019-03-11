@@ -9,6 +9,7 @@ import { HeapSortComponent } from './sorting/heap-sort/heap-sort.component';
 import { QuickSortComponent } from './sorting/quick-sort/quick-sort.component';
 import { SortingComponent } from './sorting/sorting.component';
 import { CountingSortComponent } from './sorting/counting-sort/counting-sort.component';
+import { RadixSortComponent } from './sorting/radix-sort/radix-sort.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { CountingSortComponent } from './sorting/counting-sort/counting-sort.com
     HeapSortComponent,
     QuickSortComponent,
     SortingComponent,
-    CountingSortComponent
+    CountingSortComponent,
+    RadixSortComponent
   ],
   imports: [
     BrowserModule,
