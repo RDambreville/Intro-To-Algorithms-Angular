@@ -7,7 +7,7 @@
         
         <div class="row section">
           <div class="col-12">
-              <input type="text" class="form-control" (input)="A = this.sortService.parseInputArr($event.target.value); B.length = A.length" style="width: 25%">
+              <input type="text" class="form-control" (input)="B=[]; A = this.sortService.parseInputArr($event.target.value); B.length = A.length" style="width: 25%">
               <button (click)="countingSort()">Counting Sort</button>
           </div>
         </div>
