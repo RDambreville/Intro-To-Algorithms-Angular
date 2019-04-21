@@ -9,7 +9,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {path: 'insertion-sort', component: InsertionSortComponent},
-  {path: 'Merge-sort', component: MergeSortComponent},
+  {path: 'merge-sort', component: MergeSortComponent},
   {path: 'quick-sort', component: QuickSortComponent},
   {path: 'heap-sort', component: HeapSortComponent},
   {path: 'counting-sort', component: CountingSortComponent},
