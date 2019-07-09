@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SortingService } from 'src/app/shared/services/sorting.service';
 
 @Component({
   selector: 'app-quick-sort',
@@ -11,7 +12,7 @@ export class QuickSortComponent implements OnInit {
 
   sortedOutput: any[];
 
-  constructor() { }
+  constructor(private sortService: SortingService) { }
 
   ngOnInit() {
   }

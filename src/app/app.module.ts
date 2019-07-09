@@ -10,6 +10,8 @@ import { QuickSortComponent } from './sorting/quick-sort/quick-sort.component';
 import { SortingComponent } from './sorting/sorting.component';
 import { CountingSortComponent } from './sorting/counting-sort/counting-sort.component';
 import { RadixSortComponent } from './sorting/radix-sort/radix-sort.component';
+import { StackComponent } from './data-structures/stack/stack.component';
+import { QueueComponent } from './data-structures/queue/queue.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { RadixSortComponent } from './sorting/radix-sort/radix-sort.component';
     QuickSortComponent,
     SortingComponent,
     CountingSortComponent,
-    RadixSortComponent
+    RadixSortComponent,
+    StackComponent,
+    QueueComponent
   ],
   imports: [
     BrowserModule,

@@ -7,7 +7,7 @@
     
     <div class="row section">
       <div class="col-12">
-          <input type="text" class="form-control" (input)="this.sortService.parseInputArr($event.target.value)" style="width: 25%">
+          <input type="text" class="form-control" (input)="this.inputArr = this.sortService.parseInputArr($event.target.value)" style="width: 25%">
           <button (click)="quickSortEntry()">Quick Sort</button>
       </div>
     </div>
