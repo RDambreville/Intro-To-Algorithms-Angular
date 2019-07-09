@@ -2,6 +2,7 @@ export class Stack {
 
     top: number;
     baseArray: any[] = [];
+    stackArray: any[] = [];
 
     constructor() {}
 
@@ -15,7 +16,7 @@ export class Stack {
 
     push(item): void {
         this.top++;
-        this.baseArray[this.top] = item;
+        this.stackArray[this.top] = item;
     }
 
     pop(): any {
@@ -24,8 +25,8 @@ export class Stack {
             return null;
         } else {
             this.top--;
-            const poppedItem = this.baseArray[this.top + 1];
-            this.baseArray.splice(this.top + 1, 1);
+            const poppedItem = this.stackArray[this.top + 1];
+            this.stackArray.splice(this.top + 1, 1);
             return poppedItem;
         }
     }

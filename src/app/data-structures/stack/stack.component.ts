@@ -15,6 +15,7 @@ export class StackComponent implements OnInit {
 
   stack: Stack;
   inputArray: any[] = [];
+  inputArray2: any[] = [];
   pushValue: any;
 
   constructor(public inputService: InputService) { }
@@ -25,11 +26,13 @@ export class StackComponent implements OnInit {
 
   onInput(inputString): void {
     this.inputArray = this.inputService.parseInputArr(inputString);
+    this.inputArray2 = this.inputService.parseInputArr(inputString);
   }
 
   createStack(): void {
     this.stack.baseArray = this.inputArray;
-    this.stack.top = this.stack.baseArray.length - 1;
+    this.stack.stackArray = this.inputArray2;
+    this.stack.top = this.stack.stackArray.length - 1;
     console.log('new stack', this.stack);
   }
 
