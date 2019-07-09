@@ -1,3 +1,25 @@
-<p>
-  stack works!
-</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <input type="text" class="form-control" (input)="onInput($event.target.value)">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+        <button (click)="createStack()">Create Stack</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <button (click)="pop()">Pop</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <input type="text" class="form-control" (input)="setPushValue($event.target.value)" placeholder="enter a value to push onto the stack">
+    </div>
+    <div class="col-6">
+      <button (click)="push()">Push</button>
+    </div>
+  </div>
+</div>
