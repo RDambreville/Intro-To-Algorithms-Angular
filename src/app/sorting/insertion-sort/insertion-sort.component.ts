@@ -1,5 +1,6 @@
 import { SortingService } from './../../shared/services/sorting.service';
 import { Component, OnInit } from '@angular/core';
+import { InputService } from 'src/app/shared/services/input.service';
 
 @Component({
   selector: 'app-insertion-sort',
@@ -12,7 +13,7 @@ export class InsertionSortComponent implements OnInit {
   B: any[] = []; // sorted output array
 
   constructor(
-    private sortService: SortingService
+    private inputService: InputService
   ) { }
 
   ngOnInit() {

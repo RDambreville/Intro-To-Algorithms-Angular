@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SortingService } from './../../shared/services/sorting.service';
+import { InputService } from './../../shared/services/input.service';
 
 @Component({
   selector: 'app-counting-sort',
@@ -10,7 +10,7 @@ export class CountingSortComponent implements OnInit {
   A: any[]; // input array
   B: any[] = []; // sorted array
 
-  constructor(private sortService: SortingService) { }
+  constructor(private inputService: InputService) { }
 
   ngOnInit() {
   }

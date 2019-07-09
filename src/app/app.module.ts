@@ -12,6 +12,8 @@ import { CountingSortComponent } from './sorting/counting-sort/counting-sort.com
 import { RadixSortComponent } from './sorting/radix-sort/radix-sort.component';
 import { StackComponent } from './data-structures/stack/stack.component';
 import { QueueComponent } from './data-structures/queue/queue.component';
+import { LinkedListComponent } from './data-structures/linked-list/linked-list.component';
+import { BinaryTreeComponent } from './data-structures/linked-list/binary-tree/binary-tree.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { QueueComponent } from './data-structures/queue/queue.component';
     CountingSortComponent,
     RadixSortComponent,
     StackComponent,
-    QueueComponent
+    QueueComponent,
+    LinkedListComponent,
+    BinaryTreeComponent
   ],
   imports: [
     BrowserModule,
