@@ -1,3 +1,34 @@
-<p>
-  queue works!
-</p>
+<div class="container-fluid" [formGroup]="form">
+    <div class="row">
+      <div class="col-12">
+        <input type="text" class="form-control" placeholder="Enter elements" formControlName="array">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <input type="text" class="form-control" placeholder="Enter a head index" formControlName="head">
+      </div>
+      <div class="col-6">
+        <input type="text" class="form-control" placeholder="Enter a tail index" formControlName="tail">
+      </div>
+      
+    </div>
+    <div class="row">
+      <div class="col-12">
+          <button (click)="createQueue()">Create Queue</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <button (click)="queue.dequeue()">Dequeue</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <input type="text" class="form-control" placeholder="Enter a value to enqueue" formControlName="enqVal">
+      </div>
+      <div class="col-6">
+        <button (click)="queue.enqueue(form.controls.enqVal.value)">Enqueue</button>
+      </div>
+    </div>
+  </div>
