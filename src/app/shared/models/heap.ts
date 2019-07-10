@@ -1,4 +1,4 @@
-import { SortingService } from './../../shared/services/sorting.service';
+import { SortingService } from '../services/sorting.service';
 
 export class Heap {
     heapObj: any;

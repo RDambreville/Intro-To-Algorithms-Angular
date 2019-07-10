@@ -2,7 +2,7 @@ import { TemplateService } from './../../shared/services/template.service';
 import { SortingService } from './../../shared/services/sorting.service';
 import { Component, OnInit } from '@angular/core';
 // import { SortingComponent } from '../sorting.component';
-import { Heap } from './heap';
+import { Heap } from '../../shared/models/heap';
 
 @Component({
   selector: 'app-heap-sort',
