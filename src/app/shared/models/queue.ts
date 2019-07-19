@@ -12,6 +12,9 @@ export class Queue {
     }
 
     enqueue(newItem): void {
+        if (typeof(newItem) === 'string' && !isNaN(Number.parseInt(newItem, 10))) {
+            newItem = Number.parseInt(newItem, 10);
+        }
         this.queueArray[this.tail] = newItem;
         if (this.tail === this.queueArray.length) {
             this.tail =  1;
@@ -28,7 +31,9 @@ export class Queue {
         } else {
             this.head++;
         }
-        console.log('queue after dequeue, removedItem', this, removedItem);
+        this.queueArray[this.head - 1] = String(removedItem);
+        console.log('queue after dequeue: ', this);
+        console.log('removedItem: ', removedItem);
         return removedItem;
     }
 }

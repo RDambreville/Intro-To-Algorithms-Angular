@@ -13,6 +13,7 @@ import { BinaryTreeComponent } from './data-structures/linked-list/binary-tree/b
 
 const routes: Routes = [
   // Sorting
+  {path: '', redirectTo: '/insertion-sort', pathMatch: 'full'},
   {path: 'insertion-sort', component: InsertionSortComponent},
   {path: 'merge-sort', component: MergeSortComponent},
   {path: 'quick-sort', component: QuickSortComponent},
