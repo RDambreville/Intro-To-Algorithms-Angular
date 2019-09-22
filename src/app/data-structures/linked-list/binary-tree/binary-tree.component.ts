@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-binary-tree',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BinaryTreeComponent implements OnInit {
 
-  constructor() { }
+  form: FormGroup;
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.form = this.fb.group({
+      
+    });
   }
 
 }
