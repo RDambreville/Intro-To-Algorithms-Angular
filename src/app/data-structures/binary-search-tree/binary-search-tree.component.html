@@ -1,42 +1,79 @@
 <div class="container-fluid" [formGroup]="form">
+  <!--Enter Elements-->
   <div class="row">
-    <div class="col-6">
+    <div class="col-3">
       <input type="text" class="form-control" placeholder="Enter elements" formControlName="array">
     </div>
-    <div class="col-6">
+    <div class="col-3">
         <button (click)="createBST()">Create Binary Search Tree</button>
     </div>
   </div>
-  <!-- <div class="row">
-    <div class="col-6">
-      <input type="text" class="form-control" placeholder="Enter a head index" formControlName="head">
-    </div>
-    <div class="col-6">
-      <input type="text" class="form-control" placeholder="Enter a tail index" formControlName="tail">
-    </div>
-    
-  </div> -->
+  
+  <!--Insert-->
   <div class="row">
     <div class="col-3">
-      <!-- <input type="text" class="form-control" placeholder="Enter a value to insert" formControlName="insertVal"> -->
+      <input type="text" class="form-control" placeholder="Enter a value to insert" formControlName="insertVal">
     </div>
     <div class="col-3">
-      <button (click)="linkedList.insert(form.controls.insertVal.value)">Insert</button>
+      <button (click)="bst.insert(inputService.parseInt(form.controls.insertVal.value, 10)); logBST();">Insert</button>
     </div>
   </div>
+
+  <!--Delete-->
   <div class="row">
     <div class="col-3">
-      <!-- <input type="text" class="form-control" placeholder="Enter a value to delete" formControlName="searchVal"> -->
+      <input type="text" class="form-control" placeholder="Enter a value to delete" formControlName="deleteValue">
     </div>
     <div class="col-3">
-      <button (click)="linkedList.searchAndDelete(form.controls.searchVal.value)">Delete</button>
+      <button (click)="bst.delete(inputService.parseInt(form.controls.deleteValue.value, 10))">Delete</button>
     </div>
   </div>
+
+   <!--Search-->
+   <div class="row">
+      <div class="col-3">
+        <input type="text" class="form-control" placeholder="Enter a value to search" formControlName="searchVal">
+      </div>
+      <div class="col-3">
+          <input type="text" readonly class="form-control" placeholder="Search result" formControlName="searchResult">
+        </div>
+      <div class="col-3">
+        <button (click)="form.get('searchResult').setValue(bst.search(inputService.parseInt(form.controls.searchVal.value, 10)))">Search</button>
+      </div>
+    </div>
+  
+
+  <!--Get Max-->
+  <div class="row">
+    <div class="col-3">
+        <input type="text" class="form-control" placeholder="Enter a start node value" formControlName="startNode1">
+    </div>
+    <div class="col-3">
+        <input type="text" readonly class="form-control" placeholder="Max" formControlName="maxDisplayVal">
+    </div>
+    <div class="col-1">
+        <button (click)="form.get('maxDisplayVal').setValue(bst.getMaximum(bst.search(bst.root, inputService.parseInt(form.controls.startNode1.value))).data)">Get Max</button>
+    </div>
+  </div>
+
+  <!--Get Min-->
+  <div class="row">
+      <div class="col-3">
+          <input type="text" class="form-control" placeholder="Enter a start node value" formControlName="startNode2">
+      </div>
+      <div class="col-3">
+          <input type="text" readonly class="form-control" placeholder="Min" formControlName="minDisplayVal">
+      </div>
+      <div class="col-1">
+          <button (click)="form.get('minDisplayVal').setValue(bst.getMinimum(bst.search(bst.root, inputService.parseInt(form.controls.startNode2.value))).data)">Get Min</button>
+      </div>
+    </div>
+
 
   <!--Tree drawing-->
   <div class="row">
     <div class="col-12">
-      <canvas id="canvas" width="3000" height="3000"></canvas>
+      <canvas id="bst-canvas" width="3000" height="3000"></canvas>
     </div>
   </div>
 </div>

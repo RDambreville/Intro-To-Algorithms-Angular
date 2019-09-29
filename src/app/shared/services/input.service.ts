@@ -19,4 +19,8 @@ export class InputService {
   }
 }
 
+parseInt(value: string): number {
+  return Number.parseInt(value, 10);
+}
+
 }

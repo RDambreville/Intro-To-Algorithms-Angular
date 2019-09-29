@@ -80,4 +80,67 @@ export class BinarySearchTree {
             y.right = nodeToInsert;
         }
     }
+
+
+    /**
+     * Print nodes in order.
+     * @param node -- node at which to start the walk
+     * @returns void
+     */
+    inOrderTreeWalk(node: BSTNode): void {
+        if (node) {
+            this.inOrderTreeWalk(node.left);
+            // this.drawNode();
+            console.log(node.data);
+            this.inOrderTreeWalk(node.right);
+        }
+    }
+
+    search(node: BSTNode, keyToFind: number): BSTNode {
+        if (!node || keyToFind === node.data) {
+            return node;
+        }
+        if (keyToFind < node.data) {
+            return this.search(node.left, keyToFind);
+        } else {
+            return this.search(node.right, keyToFind);
+        }
+    }
+
+    iterativeSearch(node: BSTNode, keyToFind): BSTNode {
+        while (node && keyToFind !== node.data) {
+            if (keyToFind < node.data) {
+                node = node.left;
+            } else {
+                node = node.right;
+            }
+        }
+        return node;
+    }
+
+    getMinimum(node: BSTNode): BSTNode {
+        while (node.left) {
+            node = node.left;
+        }
+        return node;
+    }
+
+    getMaximum(node: BSTNode): BSTNode {
+        while (node.right) {
+            node = node.right;
+        }
+        return node;
+    }
+
+    getSuccessor(node: BSTNode): BSTNode {
+        if (node.right) {
+            return this.getMinimum(node.right);
+        }
+        let tempNode = node.parent;
+        while (tempNode && node === tempNode.right) {
+            node = tempNode;
+            tempNode = tempNode.parent;
+        }
+        return tempNode;
+    }
 }
