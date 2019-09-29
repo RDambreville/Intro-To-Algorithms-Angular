@@ -9,7 +9,9 @@ import { QuickSortComponent } from './sorting/quick-sort/quick-sort.component';
 import { StackComponent } from './data-structures/stack/stack.component';
 import { QueueComponent } from './data-structures/queue/queue.component';
 import { LinkedListComponent } from './data-structures/linked-list/linked-list.component';
-import { BinaryTreeComponent } from './data-structures/linked-list/binary-tree/binary-tree.component';
+import { BinaryTreeComponent } from './data-structures/binary-tree/binary-tree.component';
+import { BinarySearchTreeComponent } from './data-structures/binary-search-tree/binary-search-tree.component';
+
 
 const routes: Routes = [
   // Sorting
@@ -25,7 +27,8 @@ const routes: Routes = [
   {path: 'stack', component: StackComponent},
   {path: 'queue', component: QueueComponent},
   {path: 'linked-list', component: LinkedListComponent},
-  {path: 'binary-tree', component: BinaryTreeComponent}
+  {path: 'binary-tree', component: BinaryTreeComponent},
+  {path: 'binary-search-tree', component: BinarySearchTreeComponent}
 ];
 
 @NgModule({

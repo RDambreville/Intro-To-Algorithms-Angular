@@ -15,7 +15,8 @@ import { RadixSortComponent } from './sorting/radix-sort/radix-sort.component';
 import { StackComponent } from './data-structures/stack/stack.component';
 import { QueueComponent } from './data-structures/queue/queue.component';
 import { LinkedListComponent } from './data-structures/linked-list/linked-list.component';
-import { BinaryTreeComponent } from './data-structures/linked-list/binary-tree/binary-tree.component';
+import { BinaryTreeComponent } from './data-structures/binary-tree/binary-tree.component';
+import { BinarySearchTreeComponent } from './data-structures/binary-search-tree/binary-search-tree.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { BinaryTreeComponent } from './data-structures/linked-list/binary-tree/b
     StackComponent,
     QueueComponent,
     LinkedListComponent,
-    BinaryTreeComponent
+    BinaryTreeComponent,
+    BinarySearchTreeComponent
   ],
   imports: [
     BrowserModule,
