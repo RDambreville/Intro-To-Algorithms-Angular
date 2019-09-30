@@ -25,7 +25,7 @@
       <input type="text" class="form-control" placeholder="Enter a value to delete" formControlName="deleteValue">
     </div>
     <div class="col-3">
-      <button (click)="bst.delete(inputService.parseInt(form.controls.deleteValue.value, 10))">Delete</button>
+      <button (click)="bst.delete(bst.search(bst.root, inputService.parseInt(form.controls.deleteValue.value, 10))); logBST(); redraw();">Delete</button>
     </div>
   </div>
 
@@ -38,7 +38,7 @@
           <input type="text" readonly class="form-control" placeholder="Search result" formControlName="searchResult">
         </div>
       <div class="col-3">
-        <button (click)="form.get('searchResult').setValue(bst.search(inputService.parseInt(form.controls.searchVal.value, 10)))">Search</button>
+        <button (click)="form.get('searchResult').setValue(bst.search(bst.root, inputService.parseInt(form.controls.searchVal.value, 10)))">Search</button>
       </div>
     </div>
   
@@ -70,10 +70,10 @@
     </div>
 
 
-  <!--Tree drawing-->
+  <!--Tree drawing canvase-->
   <div class="row">
     <div class="col-12">
-      <canvas id="bst-canvas" width="3000" height="3000"></canvas>
+      <canvas id="bst-canvas" style="background-color: lightgray" width="3000" height="3000"></canvas>
     </div>
   </div>
 </div>

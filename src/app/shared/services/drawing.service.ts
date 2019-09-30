@@ -1,6 +1,7 @@
 import { BSTNode } from './../models/bst-node';
 import { Injectable } from '@angular/core';
 import { Node } from '../models/node';
+import { BinaryNode } from '../models/binary-node';
 
 @Injectable({
   providedIn: 'root'
@@ -21,17 +22,33 @@ export class DrawingService {
     this.loopOverTreeAndDraw(currentNode);
   }
 
+  drawBinaryTree(canvasId: string, rootNode: BinaryNode): void {
+
+  }
+
+  drawLinkedList(canvasId: string, rootNode: Node): void {
+
+  }
+
   drawCircle(radius: number, startAngle: number, endAngle: number): void {
     this.context.beginPath();
     // define circle
     this.context.arc(this.x, this.y, radius, startAngle, endAngle);
-    this.context.stroke(); // draw the circle
+    this.context.stroke(); // draw the circle border
+
+    // fill in circle with white
+    this.context.fillStyle = 'white';
+    this.context.beginPath();
+    this.context.arc(this.x, this.y, radius - 5, startAngle, endAngle);
+    this.context.fill();
+
   }
 
-  drawText(text: string): void {
+  drawNodeText(text: string): void {
       // Draw node data inside circle
       this.context.font = '30pt Arial';
-      this.context.fillText(text, this.x, this.y);
+      this.context.fillStyle = 'black';
+      this.context.fillText(text, this.x - 10, this.y + 15);
   }
 
   setupCanvas(canvasId: string): void {
@@ -52,7 +69,7 @@ export class DrawingService {
   loopOverTreeAndDraw(currentNode: BSTNode) {
     while (currentNode) {
       this.drawCircle(50, 0 , 2 * Math.PI);
-      this.drawText(currentNode.data);
+      this.drawNodeText(currentNode.data);
       this.updateCoordinates(300, 300);
       // move to next node in tree
       currentNode = currentNode.right;
@@ -67,5 +84,9 @@ export class DrawingService {
   resetCoordinates(newX: number, newY: number): void {
     this.x = newX;
     this.y = newY;
+  }
+
+  clearCanvas(): void {
+    this.context.clearRect(0, 0, 3000, 3000);
   }
 }

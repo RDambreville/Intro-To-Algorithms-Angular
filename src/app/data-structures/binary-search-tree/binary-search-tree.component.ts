@@ -44,8 +44,13 @@ export class BinarySearchTreeComponent implements OnInit {
   }
 
   logBST(): void {
-    console.log('bst after insert');
+    console.log('bst after change');
     this.bst.inOrderTreeWalk(this.bst.root);
+  }
+
+  redraw(): void {
+    this.drawingService.clearCanvas();
+    this.drawingService.drawBSTTree('bst-canvas', this.bst.root);
   }
 
 }

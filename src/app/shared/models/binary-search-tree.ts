@@ -143,4 +143,35 @@ export class BinarySearchTree {
         }
         return tempNode;
     }
+
+    transplant(replacee: BSTNode, replacer: BSTNode): void {
+        if (!replacee.parent) {
+            this.root = replacer;
+        } else if (replacee === replacee.parent.left) {
+            replacee.parent.left = replacer;
+        } else {
+            replacee.parent.right = replacer;
+        }
+        if (replacer) {
+            replacer.parent = replacee.parent;
+        }
+    }
+
+    delete(nodeToDelete: BSTNode): void {
+        if (!nodeToDelete) {
+            this.transplant(nodeToDelete, nodeToDelete.right);
+        } else if (!nodeToDelete.right) {
+            this.transplant(nodeToDelete, nodeToDelete.left);
+        } else {
+            const buriedChild = this.getMinimum(nodeToDelete.right);
+            if (buriedChild.parent !== nodeToDelete) {
+                this.transplant(buriedChild, buriedChild.right);
+                buriedChild.right = nodeToDelete.right;
+                buriedChild.right.parent = buriedChild;
+            }
+            this.transplant(nodeToDelete, buriedChild);
+            buriedChild.left = nodeToDelete.left;
+            buriedChild.left.parent = buriedChild;
+        }
+    }
 }
