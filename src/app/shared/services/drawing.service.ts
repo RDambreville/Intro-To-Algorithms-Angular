@@ -16,7 +16,7 @@ export class DrawingService {
 
   drawBSTTree(canvasId: string, rootNode: BSTNode): void {
     this.setupCanvas(canvasId);
-    this.setupStroke('green', 5.0);
+    this.setStroke('green', 5.0);
     this.initCoordinates();
     const currentNode = rootNode;
     this.loopOverTreeAndDraw(currentNode);
@@ -56,7 +56,7 @@ export class DrawingService {
     this.context = this.canvas.getContext('2d');
   }
 
-  setupStroke(color: string, lineWidth: number): void {
+  setStroke(color: string, lineWidth: number): void {
     this.context.strokeStyle = color; // set the color for the circle to 'green'
     this.context.lineWidth = lineWidth;
   }
