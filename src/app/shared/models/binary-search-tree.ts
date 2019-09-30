@@ -144,16 +144,16 @@ export class BinarySearchTree {
         return tempNode;
     }
 
-    transplant(replacee: BSTNode, replacer: BSTNode): void {
-        if (!replacee.parent) {
-            this.root = replacer;
-        } else if (replacee === replacee.parent.left) {
-            replacee.parent.left = replacer;
+    transplant(nodeOut: BSTNode, nodeIn: BSTNode): void {
+        if (!nodeOut.parent) {
+            this.root = nodeIn;
+        } else if (nodeOut === nodeOut.parent.left) {
+            nodeOut.parent.left = nodeIn;
         } else {
-            replacee.parent.right = replacer;
+            nodeOut.parent.right = nodeIn;
         }
-        if (replacer) {
-            replacer.parent = replacee.parent;
+        if (nodeIn) {
+            nodeIn.parent = nodeOut.parent;
         }
     }
 

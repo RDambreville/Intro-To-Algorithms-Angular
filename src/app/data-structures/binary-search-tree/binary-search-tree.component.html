@@ -15,7 +15,7 @@
       <input type="text" class="form-control" placeholder="Enter a value to insert" formControlName="insertVal">
     </div>
     <div class="col-3">
-      <button (click)="bst.insert(inputService.parseInt(form.controls.insertVal.value, 10)); logBST();">Insert</button>
+      <button (click)="bst.insert(inputService.parseInt(form.controls.insertVal.value, 10)); logBST(); redraw();">Insert</button>
     </div>
   </div>
 
@@ -70,7 +70,7 @@
     </div>
 
 
-  <!--Tree drawing canvase-->
+  <!--Tree drawing canvas-->
   <div class="row">
     <div class="col-12">
       <canvas id="bst-canvas" style="background-color: lightgray" width="3000" height="3000"></canvas>

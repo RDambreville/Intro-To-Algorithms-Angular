@@ -40,7 +40,7 @@ export class BinarySearchTreeComponent implements OnInit {
   createBST(): void {
     this.bst = new BinarySearchTree(this.inputService.parseInputArr(this.form.controls.array.value));
     this.bst.inOrderTreeWalk(this.bst.root); // console.log() the tree in order
-    this.drawingService.drawBSTTree('bst-canvas', this.bst.root);
+    this.drawingService.drawBSTTree('bst-canvas', this.bst);
   }
 
   logBST(): void {
@@ -50,7 +50,7 @@ export class BinarySearchTreeComponent implements OnInit {
 
   redraw(): void {
     this.drawingService.clearCanvas();
-    this.drawingService.drawBSTTree('bst-canvas', this.bst.root);
+    this.drawingService.drawBSTTree('bst-canvas', this.bst);
   }
 
 }

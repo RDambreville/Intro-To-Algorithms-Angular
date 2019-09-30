@@ -2,6 +2,7 @@ import { BSTNode } from './../models/bst-node';
 import { Injectable } from '@angular/core';
 import { Node } from '../models/node';
 import { BinaryNode } from '../models/binary-node';
+import { BinarySearchTree } from '../models/binary-search-tree';
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +15,11 @@ export class DrawingService {
   context: CanvasRenderingContext2D;
   constructor() { }
 
-  drawBSTTree(canvasId: string, rootNode: BSTNode): void {
+  drawBSTTree(canvasId: string, bst: BinarySearchTree): void {
     this.setupCanvas(canvasId);
     this.setStroke('green', 5.0);
     this.initCoordinates();
-    const currentNode = rootNode;
+    const currentNode = bst.root;
     this.loopOverTreeAndDraw(currentNode);
   }
 
@@ -30,7 +31,7 @@ export class DrawingService {
 
   }
 
-  drawCircle(radius: number, startAngle: number, endAngle: number): void {
+  drawNode(radius: number, startAngle: number, endAngle: number): void {
     this.context.beginPath();
     // define circle
     this.context.arc(this.x, this.y, radius, startAngle, endAngle);
@@ -42,6 +43,10 @@ export class DrawingService {
     this.context.arc(this.x, this.y, radius - 5, startAngle, endAngle);
     this.context.fill();
 
+  }
+
+  drawEdge(): void {
+    // 225 degrees (lower left) or 315 degrees (lower right)
   }
 
   drawNodeText(text: string): void {
@@ -62,13 +67,13 @@ export class DrawingService {
   }
 
   initCoordinates(): void {
-    this.x = 100;
-    this.y = 100;
+    this.x = 300;
+    this.y = 300;
   }
 
   loopOverTreeAndDraw(currentNode: BSTNode) {
     while (currentNode) {
-      this.drawCircle(50, 0 , 2 * Math.PI);
+      this.drawNode(50, 0 , 2 * Math.PI);
       this.drawNodeText(currentNode.data);
       this.updateCoordinates(300, 300);
       // move to next node in tree
