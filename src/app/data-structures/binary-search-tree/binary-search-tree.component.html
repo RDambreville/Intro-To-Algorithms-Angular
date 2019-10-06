@@ -15,7 +15,9 @@
       <input type="text" class="form-control" placeholder="Enter a value to insert" formControlName="insertVal">
     </div>
     <div class="col-3">
-      <button (click)="bst.insert(inputService.parseInt(form.controls.insertVal.value, 10)); logBST(); redraw();">Insert</button>
+      <button (click)="bst.insert(inputService.parseInt(form.controls.insertVal.value, 10)); 
+                      logBST(); 
+                      redraw();">Insert</button>
     </div>
   </div>
 
@@ -25,7 +27,9 @@
       <input type="text" class="form-control" placeholder="Enter a value to delete" formControlName="deleteValue">
     </div>
     <div class="col-3">
-      <button (click)="bst.delete(bst.search(bst.root, inputService.parseInt(form.controls.deleteValue.value, 10))); logBST(); redraw();">Delete</button>
+      <button (click)="bst.delete(bst.search(bst.root, inputService.parseInt(form.controls.deleteValue.value, 10))); 
+                      logBST();
+                      redraw();">Delete</button>
     </div>
   </div>
 
@@ -38,7 +42,10 @@
           <input type="text" readonly class="form-control" placeholder="Search result" formControlName="searchResult">
         </div>
       <div class="col-3">
-        <button (click)="form.get('searchResult').setValue(bst.search(bst.root, inputService.parseInt(form.controls.searchVal.value, 10)))">Search</button>
+        <button (click)="form.get('searchResult')
+                              .setValue(
+                                bst.search(bst.root, inputService.parseInt(form.controls.searchVal.value, 10))
+                                )">Search</button>
       </div>
     </div>
   
@@ -52,7 +59,11 @@
         <input type="text" readonly class="form-control" placeholder="Max" formControlName="maxDisplayVal">
     </div>
     <div class="col-1">
-        <button (click)="form.get('maxDisplayVal').setValue(bst.getMaximum(bst.search(bst.root, inputService.parseInt(form.controls.startNode1.value))).data)">Get Max</button>
+        <button (click)="form.get('maxDisplayVal')
+                              .setValue(
+                                bst.getMaximum(
+                                  bst.search(bst.root, inputService.parseInt(form.controls.startNode1.value))
+                                  ).data)">Get Max</button>
     </div>
   </div>
 
@@ -65,7 +76,10 @@
           <input type="text" readonly class="form-control" placeholder="Min" formControlName="minDisplayVal">
       </div>
       <div class="col-1">
-          <button (click)="form.get('minDisplayVal').setValue(bst.getMinimum(bst.search(bst.root, inputService.parseInt(form.controls.startNode2.value))).data)">Get Min</button>
+          <button (click)="form.get('minDisplayVal')
+                                .setValue(
+                                  bst.getMinimum(bst.search(bst.root, inputService.parseInt(form.controls.startNode2.value))
+                                  ).data)">Get Min</button>
       </div>
     </div>
 
@@ -73,7 +87,7 @@
   <!--Tree drawing canvas-->
   <div class="row">
     <div class="col-12">
-      <canvas id="bst-canvas" style="background-color: lightgray" width="3000" height="3000"></canvas>
+      <canvas id="bst-canvas" style="background-color: lightgray" [width]="canvasSize.x" [height]="canvasSize.y"></canvas>
     </div>
   </div>
 </div>

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Node } from '../models/node';
 import { BinaryNode } from '../models/binary-node';
 import { BinarySearchTree } from '../models/binary-search-tree';
+import { CanvasSize } from 'src/app/shared/constants/canvas-size';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +14,12 @@ export class DrawingService {
   y: number;
   canvas: HTMLElement;
   context: CanvasRenderingContext2D;
+
   constructor() { }
 
   drawBSTTree(canvasId: string, bst: BinarySearchTree): void {
     this.setupCanvas(canvasId);
-    this.setStroke('green', 5.0);
+    this.setStroke('green', 2.0);
     this.initCoordinates();
     const currentNode = bst.root;
     this.loopOverTreeAndDraw(currentNode);
@@ -40,20 +42,26 @@ export class DrawingService {
     // fill in circle with white
     this.context.fillStyle = 'white';
     this.context.beginPath();
-    this.context.arc(this.x, this.y, radius - 5, startAngle, endAngle);
+    this.context.arc(this.x, this.y, radius - 1, startAngle, endAngle);
     this.context.fill();
+
+    this.drawEdge(1, 2);
 
   }
 
-  drawEdge(): void {
+  drawEdge(point1: any, point2: any): void {
+    this.context.beginPath();
+    this.context.moveTo(500, 500);
+    this.context.lineTo(200, 400);
+    this.context.stroke();
     // 225 degrees (lower left) or 315 degrees (lower right)
   }
 
   drawNodeText(text: string): void {
       // Draw node data inside circle
-      this.context.font = '30pt Arial';
+      this.context.font = (CanvasSize.x / 50) + 'pt Arial';
       this.context.fillStyle = 'black';
-      this.context.fillText(text, this.x - 10, this.y + 15);
+      this.context.fillText(text, this.x - 5, this.y + 10);
   }
 
   setupCanvas(canvasId: string): void {
@@ -67,18 +75,31 @@ export class DrawingService {
   }
 
   initCoordinates(): void {
-    this.x = 300;
-    this.y = 300;
+    this.x = CanvasSize.x / 2;
+    this.y = 40;
   }
 
   loopOverTreeAndDraw(currentNode: BSTNode) {
-    while (currentNode) {
-      this.drawNode(50, 0 , 2 * Math.PI);
+    // if (!currentNode.parent) {
+    //   this.drawNode(CanvasSize.x / 50, 0 , 2 * Math.PI);
+    //   this.drawNodeText(currentNode.data);
+    //   this.updateCoordinates(CanvasSize.x / 20, CanvasSize.y / 20);
+    // }
+    if (currentNode) {
+      this.loopOverTreeAndDraw(currentNode.left);
+      this.drawNode(CanvasSize.x / 50, 0 , 2 * Math.PI);
       this.drawNodeText(currentNode.data);
-      this.updateCoordinates(300, 300);
-      // move to next node in tree
-      currentNode = currentNode.right;
+      this.updateCoordinates(CanvasSize.x / 20, CanvasSize.y / 20);
+      this.loopOverTreeAndDraw(currentNode.left);
     }
+
+    // while (currentNode) {
+    //   this.drawNode(CanvasSize.x / 50, 0 , 2 * Math.PI);
+    //   this.drawNodeText(currentNode.data);
+    //   this.updateCoordinates(CanvasSize.x / 20, CanvasSize.y / 20);
+    //   // move to next node in tree
+    //   currentNode = currentNode.right;
+    // }
   }
 
   updateCoordinates(offsetX: number, offsetY: number): void {
