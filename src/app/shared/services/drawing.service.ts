@@ -12,7 +12,7 @@ export class DrawingService {
 
   x: number;
   y: number;
-  canvas: HTMLElement;
+  canvas: HTMLCanvasElement;
   context: CanvasRenderingContext2D;
 
   constructor() { }
@@ -65,7 +65,7 @@ export class DrawingService {
   }
 
   setupCanvas(canvasId: string): void {
-    this.canvas = document.getElementById(canvasId);
+    this.canvas = <HTMLCanvasElement> document.getElementById(canvasId);
     this.context = this.canvas.getContext('2d');
   }
 
