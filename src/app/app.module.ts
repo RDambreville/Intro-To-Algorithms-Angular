@@ -17,6 +17,7 @@ import { QueueComponent } from './data-structures/queue/queue.component';
 import { LinkedListComponent } from './data-structures/linked-list/linked-list.component';
 import { BinaryTreeComponent } from './data-structures/binary-tree/binary-tree.component';
 import { BinarySearchTreeComponent } from './data-structures/binary-search-tree/binary-search-tree.component';
+import { RedBlackTreeComponent } from './data-structures/red-black-tree/red-black-tree.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { BinarySearchTreeComponent } from './data-structures/binary-search-tree/
     QueueComponent,
     LinkedListComponent,
     BinaryTreeComponent,
-    BinarySearchTreeComponent
+    BinarySearchTreeComponent,
+    RedBlackTreeComponent
   ],
   imports: [
     BrowserModule,

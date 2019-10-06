@@ -5,11 +5,6 @@ export class BinarySearchTree {
     root: BSTNode;
 
     constructor(array: any[]) {
-    //     // sort the input array in ascending order
-    //    array.sort((a, b) => b - a > 0 ? 0 : 1);
-    //    // set the root of the tree to be the middle element of the input array
-    //    this.root = new BSTNode(array[Math.floor((array.length - 1) / 2)]);
-
         array.forEach(x => this.insert(x));
         console.log('binary search tree', this.root);
     }
