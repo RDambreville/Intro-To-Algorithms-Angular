@@ -19,10 +19,11 @@ export class DrawingService {
 
   drawBSTTree(canvasId: string, bst: BinarySearchTree): void {
     this.setupCanvas(canvasId);
+    this.clearCanvas();
     this.setStroke('green', 2.0);
     this.initCoordinates();
     const currentNode = bst.root;
-    this.loopOverTreeAndDraw(currentNode);
+    this.loopOverTreeAndDraw(currentNode, this.x, this.y);
   }
 
   drawBinaryTree(canvasId: string, rootNode: BinaryNode): void {
@@ -33,35 +34,35 @@ export class DrawingService {
 
   }
 
-  drawNode(radius: number, startAngle: number, endAngle: number): void {
+  drawNode(radius: number, startAngle: number, endAngle: number, x: number, y: number): void {
     this.context.beginPath();
-    // define circle
-    this.context.arc(this.x, this.y, radius, startAngle, endAngle);
+    this.context.arc(x, y, radius, startAngle, endAngle);  // define circle
     this.context.stroke(); // draw the circle border
 
     // fill in circle with white
     this.context.fillStyle = 'white';
     this.context.beginPath();
-    this.context.arc(this.x, this.y, radius - 1, startAngle, endAngle);
+    this.context.arc(x, y, radius - 1, startAngle, endAngle);
     this.context.fill();
-
-    this.drawEdge(1, 2);
-
   }
 
-  drawEdge(point1: any, point2: any): void {
+  drawEdge(x: any, y: any, direction: string): void {
     this.context.beginPath();
-    this.context.moveTo(500, 500);
-    this.context.lineTo(200, 400);
+     if (direction === 'left') {
+      this.context.moveTo(x - 10, y + 10);
+      this.context.lineTo(x - 40, y + 40);
+    } else {
+      this.context.moveTo(x + 10, y + 10);
+      this.context.lineTo(x + 40, y + 40);
+    }
     this.context.stroke();
-    // 225 degrees (lower left) or 315 degrees (lower right)
   }
 
-  drawNodeText(text: string): void {
+  drawNodeText(text: string, x: number, y: number): void {
       // Draw node data inside circle
       this.context.font = (CanvasSize.x / 50) + 'pt Arial';
       this.context.fillStyle = 'black';
-      this.context.fillText(text, this.x - 5, this.y + 10);
+      this.context.fillText(text, x - 5, y + 10);
   }
 
   setupCanvas(canvasId: string): void {
@@ -76,35 +77,22 @@ export class DrawingService {
 
   initCoordinates(): void {
     this.x = CanvasSize.x / 2;
-    this.y = 40;
+    this.y = 40 /*CanvasSize.y / 2*/;
   }
 
-  loopOverTreeAndDraw(currentNode: BSTNode) {
-    // if (!currentNode.parent) {
-    //   this.drawNode(CanvasSize.x / 50, 0 , 2 * Math.PI);
-    //   this.drawNodeText(currentNode.data);
-    //   this.updateCoordinates(CanvasSize.x / 20, CanvasSize.y / 20);
-    // }
-    if (currentNode) {
-      this.loopOverTreeAndDraw(currentNode.left);
-      this.drawNode(CanvasSize.x / 50, 0 , 2 * Math.PI);
-      this.drawNodeText(currentNode.data);
-      this.updateCoordinates(CanvasSize.x / 20, CanvasSize.y / 20);
-      this.loopOverTreeAndDraw(currentNode.left);
+  loopOverTreeAndDraw(currentNode: BSTNode, x: number, y: number) {
+      if (currentNode) {
+      this.drawNode(CanvasSize.x / 35, 0 , 2 * Math.PI, x, y);
+      this.drawNodeText(currentNode.data, x, y - 5); // put text in center of circle; 
+      if (currentNode.left) {
+        this.drawEdge(x, y, 'left');
+        this.loopOverTreeAndDraw(currentNode.left, (x - 40), (y + 40));
+      }
+      if (currentNode.right) {
+        this.drawEdge(x, y, 'right');
+        this.loopOverTreeAndDraw(currentNode.right, (x + 40), (y + 40));
+      }
     }
-
-    // while (currentNode) {
-    //   this.drawNode(CanvasSize.x / 50, 0 , 2 * Math.PI);
-    //   this.drawNodeText(currentNode.data);
-    //   this.updateCoordinates(CanvasSize.x / 20, CanvasSize.y / 20);
-    //   // move to next node in tree
-    //   currentNode = currentNode.right;
-    // }
-  }
-
-  updateCoordinates(offsetX: number, offsetY: number): void {
-    this.x += offsetX;
-    this.y += offsetY;
   }
 
   resetCoordinates(newX: number, newY: number): void {
@@ -113,6 +101,6 @@ export class DrawingService {
   }
 
   clearCanvas(): void {
-    this.context.clearRect(0, 0, 3000, 3000);
+    this.context.clearRect(0, 0, CanvasSize.x, CanvasSize.x);
   }
 }

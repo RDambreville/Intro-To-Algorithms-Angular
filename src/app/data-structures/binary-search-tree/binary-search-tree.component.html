@@ -44,7 +44,7 @@
       <div class="col-3">
         <button (click)="form.get('searchResult')
                               .setValue(
-                                bst.search(bst.root, inputService.parseInt(form.controls.searchVal.value, 10))
+                                bst.search(bst.root, inputService.parseInt(form.controls.searchVal.value, 10)).data
                                 )">Search</button>
       </div>
     </div>

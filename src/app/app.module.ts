@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
@@ -38,6 +39,7 @@ import { RedBlackTreeComponent } from './data-structures/red-black-tree/red-blac
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
     AppRoutingModule

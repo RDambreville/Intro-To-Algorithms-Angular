@@ -1,4 +1,4 @@
 export const CanvasSize = {
-    x: 1000,
-    y: 1000
+    x: 500,
+    y: 500
 };
