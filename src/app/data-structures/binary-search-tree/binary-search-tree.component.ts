@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { BinarySearchTree } from 'src/app/shared/models/binary-search-tree';
 import { DrawingService } from 'src/app/shared/services/drawing.service';
 import { CanvasSize } from 'src/app/shared/constants/canvas-size';
+import { BSTNode } from 'src/app/shared/models/bst-node';
 
 @Component({
   selector: 'app-binary-search-tree',
@@ -55,6 +56,10 @@ export class BinarySearchTreeComponent implements OnInit {
   redraw(): void {
     this.drawingService.clearCanvas();
     this.drawingService.drawBSTTree('bst-canvas', this.bst);
+  }
+
+  highlightNodeInCanvas(node: BSTNode, searchCondition: string): void {
+    this.drawingService.drawBSTTree('bst-canvas', this.bst, node, searchCondition);
   }
 
 }

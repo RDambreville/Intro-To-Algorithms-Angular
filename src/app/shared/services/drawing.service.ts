@@ -17,13 +17,13 @@ export class DrawingService {
 
   constructor() { }
 
-  drawBSTTree(canvasId: string, bst: BinarySearchTree): void {
+  drawBSTTree(canvasId: string, bst: BinarySearchTree, nodeToHighlight?: BSTNode, searchCondition?: string): void {
     this.setupCanvas(canvasId);
     this.clearCanvas();
     this.setStroke('green', 2.0);
     this.initCoordinates();
     const currentNode = bst.root;
-    this.loopOverTreeAndDraw(currentNode, this.x, this.y);
+    this.loopOverTreeAndDraw(currentNode, this.x, this.y, nodeToHighlight, searchCondition);
   }
 
   drawBinaryTree(canvasId: string, rootNode: BinaryNode): void {
@@ -34,9 +34,13 @@ export class DrawingService {
 
   }
 
-  drawNode(radius: number, startAngle: number, endAngle: number, x: number, y: number): void {
+  drawNode(radius: number, startAngle: number, endAngle: number, x: number, y: number,
+    currentNode: BSTNode, nodeToHighlight?: BSTNode): void {
+      if (nodeToHighlight && currentNode === nodeToHighlight) {
+        this.setStroke('yellow', 2.0);
+      }
     this.context.beginPath();
-    this.context.arc(x, y, radius, startAngle, endAngle);  // define circle
+    this.context.arc(x, y, radius, startAngle, endAngle);  // define circle with center at (x, y)
     this.context.stroke(); // draw the circle border
 
     // fill in circle with white
@@ -47,6 +51,7 @@ export class DrawingService {
   }
 
   drawEdge(x: any, y: any, direction: string): void {
+    this.setStroke('green', 2.0);
     this.context.beginPath();
      if (direction === 'left') {
       this.context.moveTo(x - 10, y + 10);
@@ -71,7 +76,7 @@ export class DrawingService {
   }
 
   setStroke(color: string, lineWidth: number): void {
-    this.context.strokeStyle = color; // set the color for the circle to 'green'
+    this.context.strokeStyle = color;
     this.context.lineWidth = lineWidth;
   }
 
@@ -80,17 +85,17 @@ export class DrawingService {
     this.y = 40 /*CanvasSize.y / 2*/;
   }
 
-  loopOverTreeAndDraw(currentNode: BSTNode, x: number, y: number) {
+  loopOverTreeAndDraw(currentNode: BSTNode, x: number, y: number, nodeToHighlight?: BSTNode, searchCondition?: string) {
       if (currentNode) {
-      this.drawNode(CanvasSize.x / 35, 0 , 2 * Math.PI, x, y);
-      this.drawNodeText(currentNode.data, x, y - 5); // put text in center of circle; 
+      this.drawNode(CanvasSize.x / 35, 0 , 2 * Math.PI, x, y, currentNode, nodeToHighlight);
+      this.drawNodeText(currentNode.data, x, y - 5); // put text in center of circle
       if (currentNode.left) {
         this.drawEdge(x, y, 'left');
-        this.loopOverTreeAndDraw(currentNode.left, (x - 40), (y + 40));
+        this.loopOverTreeAndDraw(currentNode.left, (x - 40), (y + 40), nodeToHighlight, searchCondition);
       }
       if (currentNode.right) {
         this.drawEdge(x, y, 'right');
-        this.loopOverTreeAndDraw(currentNode.right, (x + 40), (y + 40));
+        this.loopOverTreeAndDraw(currentNode.right, (x + 40), (y + 40), nodeToHighlight, searchCondition);
       }
     }
   }

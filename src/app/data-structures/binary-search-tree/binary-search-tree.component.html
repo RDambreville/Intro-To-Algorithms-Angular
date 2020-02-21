@@ -45,7 +45,10 @@
         <button (click)="form.get('searchResult')
                               .setValue(
                                 bst.search(bst.root, inputService.parseInt(form.controls.searchVal.value, 10)).data
-                                )">Search</button>
+                                );
+                                highlightNodeInCanvas(
+                                  bst.search(bst.root, inputService.parseInt(form.controls.searchVal.value, 10)), 'identity'
+                                  )">Search</button>
       </div>
     </div>
   
@@ -63,7 +66,10 @@
                               .setValue(
                                 bst.getMaximum(
                                   bst.search(bst.root, inputService.parseInt(form.controls.startNode1.value))
-                                  ).data)">Get Max</button>
+                                  ).data);
+                                  highlightNodeInCanvas(
+                                    bst.search(bst.root, inputService.parseInt(form.controls.startNode1.value)), 'max'
+                                    )">Get Max</button>
     </div>
   </div>
 
@@ -79,7 +85,10 @@
           <button (click)="form.get('minDisplayVal')
                                 .setValue(
                                   bst.getMinimum(bst.search(bst.root, inputService.parseInt(form.controls.startNode2.value))
-                                  ).data)">Get Min</button>
+                                  ).data);
+                                  highlightNodeInCanvas(
+                                    bst.getMinimum(bst.search(bst.root, inputService.parseInt(form.controls.startNode2.value))), 'min'
+                                    )">Get Min</button>
       </div>
     </div>
 
