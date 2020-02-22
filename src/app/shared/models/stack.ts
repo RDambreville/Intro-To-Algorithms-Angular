@@ -4,7 +4,14 @@ export class Stack {
     baseArray: any[] = [];
     stackArray: any[] = [];
 
-    constructor() {}
+    constructor(inputArray: any[]) {
+        this.baseArray = inputArray;
+        this.stackArray = inputArray;
+        this.top = this.baseArray.length - 1;
+        // inputArray.forEach(item => {
+        //     this.push(item);
+        // });
+    }
 
     isStackEmpty(): boolean {
         if (this.top === 0) {

@@ -1,3 +1,4 @@
+import { DrawingService } from 'src/app/shared/services/drawing.service';
 import { Component, OnInit } from '@angular/core';
 import { InputService } from 'src/app/shared/services/input.service';
 import { Stack } from 'src/app/shared/models/stack';
@@ -15,25 +16,17 @@ export class StackComponent implements OnInit {
 
   stack: Stack;
   inputArray: any[] = [];
-  inputArray2: any[] = [];
   pushValue: any;
 
-  constructor(public inputService: InputService) { }
+  constructor(public inputService: InputService, private drawingService: DrawingService) { }
 
   ngOnInit() {
-    this.stack = new Stack();
-  }
-
-  onInput(inputString): void {
-    this.inputArray = this.inputService.parseInputArr(inputString);
-    this.inputArray2 = this.inputService.parseInputArr(inputString);
   }
 
   createStack(): void {
-    this.stack.baseArray = this.inputArray;
-    this.stack.stackArray = this.inputArray2;
-    this.stack.top = this.stack.stackArray.length - 1;
+    this.stack = new Stack(this.inputArray);
     console.log('new stack', this.stack);
+    this.drawingService.drawStack('stack-canvas', this.stack);
   }
 
   setPushValue(value): void {
@@ -43,11 +36,13 @@ export class StackComponent implements OnInit {
   pop(): any {
     console.log('popped element', this.stack.pop());
     console.log('stack post-pop', this.stack);
+    this.drawingService.drawStack('stack-canvas', this.stack);
   }
 
   push(): void {
     this.stack.push(this.pushValue);
     console.log('stack post-push', this.stack);
+    this.drawingService.drawStack('stack-canvas', this.stack);
   }
 
 }

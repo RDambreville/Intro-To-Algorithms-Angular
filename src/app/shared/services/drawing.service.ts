@@ -4,6 +4,8 @@ import { Node } from '../models/node';
 import { BinaryNode } from '../models/binary-node';
 import { BinarySearchTree } from '../models/binary-search-tree';
 import { CanvasSize } from 'src/app/shared/constants/canvas-size';
+import { Stack } from '../models/stack';
+import { stat } from 'fs';
 
 @Injectable({
   providedIn: 'root'
@@ -23,10 +25,9 @@ export class DrawingService {
 
   drawBSTTree(canvasId: string, bst: BinarySearchTree, nodeToHighlight?: BSTNode, searchCondition?: string, color?: string): void {
     this.setupCanvas(canvasId);
-    this.clearCanvas();
     this.setLocalVars(nodeToHighlight, searchCondition, color);
     this.setStroke('green', 2.0);
-    this.initCoordinates();
+    this.initCoordinates(CanvasSize.x / 2, 40);
     const currentNode = bst.root;
     this.traverseTreeAndDraw(currentNode, this.x, this.y);
   }
@@ -35,6 +36,7 @@ export class DrawingService {
   setupCanvas(canvasId: string): void {
     this.canvas = <HTMLCanvasElement>document.getElementById(canvasId);
     this.context = this.canvas.getContext('2d');
+    this.clearCanvas();
   }
 
   clearCanvas(): void {
@@ -53,9 +55,9 @@ export class DrawingService {
     this.context.lineWidth = lineWidth;
   }
 
-  initCoordinates(): void {
-    this.x = CanvasSize.x / 2;
-    this.y = 40 /*CanvasSize.y / 2*/;
+  initCoordinates(x: number, y: number): void {
+    this.x = x;
+    this.y = y;
   }
 
   traverseTreeAndDraw(currentNode: BSTNode, x: number, y: number) {
@@ -63,11 +65,11 @@ export class DrawingService {
       this.drawNode(CanvasSize.x / 35, 0, 2 * Math.PI, x, y, currentNode);
       this.drawNodeText(currentNode.data, x, y - 5); // put text in center of circle
       if (currentNode.left) {
-        this.drawEdge(x, y, 'left');
+        this.drawDiagonalEdge(x, y, 'left');
         this.traverseTreeAndDraw(currentNode.left, (x - 40), (y + 40));
       }
       if (currentNode.right) {
-        this.drawEdge(x, y, 'right');
+        this.drawDiagonalEdge(x, y, 'right');
         this.traverseTreeAndDraw(currentNode.right, (x + 40), (y + 40));
       }
     }
@@ -97,7 +99,7 @@ export class DrawingService {
     this.context.fillText(text, x - 5, y + 10);
   }
 
-  drawEdge(x: any, y: any, direction: string): void {
+  drawDiagonalEdge(x: any, y: any, direction: string): void {
     this.setStroke('green', 2.0);
     this.context.beginPath();
     if (direction === 'left') {
@@ -108,6 +110,44 @@ export class DrawingService {
       this.context.lineTo(x + 40, y + 40);
     }
     this.context.stroke();
+  }
+
+
+  drawStack(canvasId: string, stack: Stack): void {
+    this.setupCanvas(canvasId);
+    this.initCoordinates(this.canvas.width / 2, 10);
+    this.setStroke('green', 2.0);
+    // const bottomUpArray = stack.stackArray.reverse();
+    // stack.stackArray.forEach((data, index) => {
+    //   this.drawRectBorder(index);
+    //   this.fillRectBody('white', index);
+    //   this.drawRectTextData(data, index);
+    // });
+    const length = stack.stackArray.length - 1;
+    for (let i = length; i >= 0; i--) {
+      this.drawRectBorder(i);
+      this.fillRectBody('white', i);
+      this.drawRectTextData(stack.stackArray[i], (length)-i);
+    }
+  }
+
+  drawRectBorder(index: number): void {
+    this.context.beginPath();
+    this.context.rect(this.x / 2, this.y + 50 * index, 100, 50);
+    this.context.stroke();
+  }
+
+  fillRectBody(color: string, index: number) {
+    this.context.fillStyle = color;
+    this.context.beginPath();
+    this.context.rect(this.x / 2, this.y + 50 * index, 100, 50);
+    this.context.fill();
+  }
+
+  drawRectTextData(data: any, index: number): void {
+    this.context.font = (CanvasSize.x / 50) + 'pt Arial';
+    this.context.fillStyle = 'black';
+    this.context.fillText(data, (this.x / 2) + 50, (index + 1) * 50);
   }
 
 
