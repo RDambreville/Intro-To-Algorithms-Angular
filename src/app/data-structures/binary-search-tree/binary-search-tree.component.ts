@@ -3,7 +3,6 @@ import { InputService } from 'src/app/shared/services/input.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { BinarySearchTree } from 'src/app/shared/models/binary-search-tree';
 import { DrawingService } from 'src/app/shared/services/drawing.service';
-import { CanvasSize } from 'src/app/shared/constants/canvas-size';
 import { BSTNode } from 'src/app/shared/models/bst-node';
 
 @Component({
@@ -16,7 +15,6 @@ export class BinarySearchTreeComponent implements OnInit {
   inputArray: any[];
   form: FormGroup;
   bst: BinarySearchTree;
-  canvasSize: any;
 
   constructor(
     private inputService: InputService,
@@ -25,7 +23,6 @@ export class BinarySearchTreeComponent implements OnInit {
 
   ngOnInit() {
     this.buildForm();
-    this.canvasSize = CanvasSize;
   }
 
   buildForm(): void {

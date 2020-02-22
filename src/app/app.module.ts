@@ -19,6 +19,7 @@ import { LinkedListComponent } from './data-structures/linked-list/linked-list.c
 import { BinaryTreeComponent } from './data-structures/binary-tree/binary-tree.component';
 import { BinarySearchTreeComponent } from './data-structures/binary-search-tree/binary-search-tree.component';
 import { RedBlackTreeComponent } from './data-structures/red-black-tree/red-black-tree.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { RedBlackTreeComponent } from './data-structures/red-black-tree/red-blac
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

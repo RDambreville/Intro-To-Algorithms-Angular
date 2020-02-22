@@ -31,4 +31,11 @@
         <button (click)="queue.enqueue(form.controls.enqVal.value)">Enqueue</button>
       </div>
     </div>
+
+    <!--Canvas-->
+    <div class="row">
+      <div class="col-12">
+        <app-canvas [id]="'queue-canvas'"></app-canvas>
+      </div>
+    </div>
   </div>

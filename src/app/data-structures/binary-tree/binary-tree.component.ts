@@ -13,6 +13,9 @@ export class BinaryTreeComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
+      array: [],
+      insertVal: '',
+      searchVal: ''
 
     });
   }

@@ -31,6 +31,9 @@ export class Queue {
         } else {
             this.head++;
         }
+        // Mark the removed item to set it apart from the legitimate members of the queue
+        // If the queue is a list of customers waiting to be serviced, then the dequeued item is a 
+        // "loiterer" standing in the way
         this.queueArray[this.head - 1] = String(removedItem);
         console.log('queue after dequeue: ', this);
         console.log('removedItem: ', removedItem);
