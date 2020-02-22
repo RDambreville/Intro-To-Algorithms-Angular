@@ -58,8 +58,8 @@ export class BinarySearchTreeComponent implements OnInit {
     this.drawingService.drawBSTTree('bst-canvas', this.bst);
   }
 
-  highlightNodeInCanvas(node: BSTNode, searchCondition: string): void {
-    this.drawingService.drawBSTTree('bst-canvas', this.bst, node, searchCondition);
+  highlightNodeInCanvas(node: BSTNode, searchCondition: string, color: string): void {
+    this.drawingService.drawBSTTree('bst-canvas', this.bst, node, searchCondition, color);
   }
 
 }

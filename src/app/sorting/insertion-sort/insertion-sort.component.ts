@@ -1,6 +1,10 @@
-import { SortingService } from './../../shared/services/sorting.service';
 import { Component, OnInit } from '@angular/core';
 import { InputService } from 'src/app/shared/services/input.service';
+import { DrawingService } from 'src/app/shared/services/drawing.service';
+import { SortingService } from './../../shared/services/sorting.service';
+import { CanvasSize } from 'src/app/shared/constants/canvas-size';
+
+
 
 @Component({
   selector: 'app-insertion-sort',
@@ -12,11 +16,15 @@ export class InsertionSortComponent implements OnInit {
   A: any[] = []; // input array
   B: any[] = []; // sorted output array
 
+  canvasSize: any;
+
   constructor(
-    private inputService: InputService
+    private inputService: InputService,
+    private drawingService: DrawingService
   ) { }
 
   ngOnInit() {
+    this.canvasSize = CanvasSize;
   }
 
   insertionSort() {

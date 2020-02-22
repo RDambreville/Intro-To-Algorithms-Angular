@@ -27,9 +27,10 @@
       <input type="text" class="form-control" placeholder="Enter a value to delete" formControlName="deleteValue">
     </div>
     <div class="col-3">
-      <button (click)="bst.delete(bst.search(bst.root, inputService.parseInt(form.controls.deleteValue.value, 10))); 
-                      logBST();
-                      redraw();">Delete</button>
+      <button (click)=" highlightNodeInCanvas(
+                          bst.search(bst.root, inputService.parseInt(form.controls.deleteValue.value, 10)), 'identity', 'red'
+                        );
+                      ">Delete</button>
     </div>
   </div>
 
