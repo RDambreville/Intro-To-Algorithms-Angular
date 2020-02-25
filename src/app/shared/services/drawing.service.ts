@@ -5,7 +5,6 @@ import { BinaryNode } from '../models/binary-node';
 import { BinarySearchTree } from '../models/binary-search-tree';
 import { CanvasSize } from 'src/app/shared/constants/canvas-size';
 import { Stack } from '../models/stack';
-import { stat } from 'fs';
 
 @Injectable({
   providedIn: 'root'
@@ -28,8 +27,7 @@ export class DrawingService {
     this.setLocalVars(nodeToHighlight, searchCondition, color);
     this.setStroke('green', 2.0);
     this.initCoordinates(CanvasSize.x / 2, 40);
-    const currentNode = bst.root;
-    this.traverseTreeAndDraw(currentNode, this.x, this.y);
+    this.traverseTreeAndDraw(bst.root, this.x, this.y);
   }
 
 
@@ -63,13 +61,12 @@ export class DrawingService {
   traverseTreeAndDraw(currentNode: BSTNode, x: number, y: number) {
     if (currentNode) {
       this.drawNode(CanvasSize.x / 35, 0, 2 * Math.PI, x, y, currentNode);
-      this.drawNodeText(currentNode.data, x, y - 5); // put text in center of circle
       if (currentNode.left) {
-        this.drawDiagonalEdge(x, y, 'left');
+        this.drawDiagonalEdge(currentNode, x, y, 'left');
         this.traverseTreeAndDraw(currentNode.left, (x - 40), (y + 40));
       }
       if (currentNode.right) {
-        this.drawDiagonalEdge(x, y, 'right');
+        this.drawDiagonalEdge(currentNode, x, y, 'right');
         this.traverseTreeAndDraw(currentNode.right, (x + 40), (y + 40));
       }
     }
@@ -78,7 +75,6 @@ export class DrawingService {
   drawNode(radius: number, startAngle: number, endAngle: number, x: number, y: number,
     currentNode: BSTNode): void {
     if (this.nodeToHighlight && currentNode === this.nodeToHighlight) {
-
       this.setStroke(this.color ? this.color : 'yellow', 2.0);
     }
     this.context.beginPath();
@@ -90,6 +86,9 @@ export class DrawingService {
     this.context.beginPath();
     this.context.arc(x, y, radius - 1, startAngle, endAngle);
     this.context.fill();
+
+    // put text in center of circle
+    this.drawNodeText(currentNode.data, x, y - 5);
   }
 
   drawNodeText(text: string, x: number, y: number): void {
@@ -99,13 +98,13 @@ export class DrawingService {
     this.context.fillText(text, x - 5, y + 10);
   }
 
-  drawDiagonalEdge(x: any, y: any, direction: string): void {
+  drawDiagonalEdge(currentNode: BSTNode, x: any, y: any, direction: string): void {
     this.setStroke('green', 2.0);
     this.context.beginPath();
-    if (direction === 'left') {
+    if (direction === 'left' && currentNode.left) {
       this.context.moveTo(x - 10, y + 10);
       this.context.lineTo(x - 40, y + 40);
-    } else {
+    } else if (direction === 'right' && currentNode.right) {
       this.context.moveTo(x + 10, y + 10);
       this.context.lineTo(x + 40, y + 40);
     }
@@ -124,23 +123,24 @@ export class DrawingService {
     //   this.drawRectTextData(data, index);
     // });
     const length = stack.stackArray.length - 1;
-    for (let i = length; i >= 0; i--) {
+    // for (let i = length; i >= 0; i--) {
+    for (let i = 0; i <= length; i++) {
       this.drawRectBorder(i);
       this.fillRectBody('white', i);
-      this.drawRectTextData(stack.stackArray[i], (length)-i);
+      this.drawRectTextData(stack.stackArray[length-i], /*(length)-i*/ i);
     }
   }
 
   drawRectBorder(index: number): void {
     this.context.beginPath();
-    this.context.rect(this.x / 2, this.y + 50 * index, 100, 50);
+    this.context.rect(this.x / 2, this.y + (50 * index), 100, 50);
     this.context.stroke();
   }
 
   fillRectBody(color: string, index: number) {
     this.context.fillStyle = color;
     this.context.beginPath();
-    this.context.rect(this.x / 2, this.y + 50 * index, 100, 50);
+    this.context.rect(this.x / 2, this.y + (50 * index), 100, 50);
     this.context.fill();
   }
 
