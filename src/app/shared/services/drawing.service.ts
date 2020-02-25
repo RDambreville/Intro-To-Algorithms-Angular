@@ -116,18 +116,11 @@ export class DrawingService {
     this.setupCanvas(canvasId);
     this.initCoordinates(this.canvas.width / 2, 10);
     this.setStroke('green', 2.0);
-    // const bottomUpArray = stack.stackArray.reverse();
-    // stack.stackArray.forEach((data, index) => {
-    //   this.drawRectBorder(index);
-    //   this.fillRectBody('white', index);
-    //   this.drawRectTextData(data, index);
-    // });
     const length = stack.stackArray.length - 1;
-    // for (let i = length; i >= 0; i--) {
     for (let i = 0; i <= length; i++) {
       this.drawRectBorder(i);
       this.fillRectBody('white', i);
-      this.drawRectTextData(stack.stackArray[length-i], /*(length)-i*/ i);
+      this.drawRectTextData(stack.stackArray[length - i], i);
     }
   }
 
