@@ -40,9 +40,11 @@ export class StackComponent implements OnInit {
   }
 
   push(): void {
-    this.stack.push(this.pushValue);
-    console.log('stack post-push', this.stack);
-    this.drawingService.drawStack('stack-canvas', this.stack);
+    if (this.pushValue) {
+      this.stack.push(this.pushValue);
+      console.log('stack post-push', this.stack);
+      this.drawingService.drawStack('stack-canvas', this.stack);
+    }
   }
 
 }

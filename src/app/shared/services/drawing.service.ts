@@ -152,6 +152,11 @@ export class DrawingService {
 
   }
 
+  drawPoint(x: number, y: number): void {
+    this.setStroke('green', 2.0);
+    this.drawNode(CanvasSize.x / 35, 0, 2*Math.PI, x, y, new BSTNode(x + ', ' + y));
+  }
+
   resetCoordinates(newX: number, newY: number): void {
     this.x = newX;
     this.y = newY;
