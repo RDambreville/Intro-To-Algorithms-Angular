@@ -157,6 +157,15 @@ export class DrawingService {
     this.drawNode(CanvasSize.x / 35, 0, 2*Math.PI, x, y, new BSTNode(x + ', ' + y));
   }
 
+  checkForPreExistingPaint(x: number, y: number): void {
+    this.drawPoint(x, y);
+    // let imageData = this.context.createImageData(this.canvas.width, this.canvas.height);
+    let imageData = this.context.getImageData(x, y, 1, 1 );
+    // if 
+    console.log('imageData', imageData);
+    // if (this.ct.ImageData)
+  }
+
   resetCoordinates(newX: number, newY: number): void {
     this.x = newX;
     this.y = newY;

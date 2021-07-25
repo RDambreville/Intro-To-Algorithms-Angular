@@ -24,7 +24,13 @@ ngAfterViewInit() {
 
   handleMouse(event: any): void {
     // console.log('mouse event', event);
-    this.drawingService.drawPoint(event.offsetX, event.offsetY);
+    // if (event && event.buttons === 1) { // if left button is pressed
+    //   this.drawingService.drawPoint(event.offsetX, event.offsetY);
+    // }
+
+    // this.drawingService.drawPoint(event.offsetX, event.offsetY);
+    // this.drawingService.checkForPreExistingPaint(event.offsetX, event.offsetY);
+    this.drawingService.checkForPreExistingPaint(event.layerX, event.layerY);
   }
 
 }

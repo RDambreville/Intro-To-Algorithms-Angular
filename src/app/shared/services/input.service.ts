@@ -11,11 +11,14 @@ export class InputService {
     if (inputStr.length > 0) {
       if (inputStr.includes(', ')) {
         return inputStr.split(', ').map(item => item = Number.parseInt(item, 10));
-      } else if (inputStr.includes(',')) {
+      }
+      if (inputStr.includes(',')) {
         return inputStr.split(',').map(item => item = Number.parseInt(item, 10));
-      } else if (inputStr.includes('')) {
+      }
+      if (inputStr.includes('')) {
         return inputStr.split('').map(item => item = Number.parseInt(item, 10));
       }
+      return [];
   }
 }
 

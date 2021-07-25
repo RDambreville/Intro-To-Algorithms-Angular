@@ -24,10 +24,8 @@ export class QuickSortComponent implements OnInit {
     // this.inputArr = this.inputArr.map(num => {
     //   return (num = Number.parseInt(num, 10));
     // });
-    this.quickSort(this.inputArr, 0, this.inputArr.length - 1);
-
-    console.log('sorted Array', this.inputArr);
-    this.sortedOutput = this.inputArr;
+    this.sortedOutput = this.quickSort(this.inputArr, 0, this.inputArr.length - 1);
+    console.log('sorted Array', this.sortedOutput);
 
   }
 
